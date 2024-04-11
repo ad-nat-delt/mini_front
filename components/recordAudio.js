@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Button, TouchableOpacity, Text } from 'react-native';
 import { Audio } from 'expo-av';
 import { useNavigation } from '@react-navigation/native';
-import functionScreen from './functions';
 
 const RecordScreen = () => {
     const [recording, setRecording] = useState();
@@ -46,35 +45,6 @@ const RecordScreen = () => {
       playSound(uri);
       navigation.navigate('Functions');
     }
-    // async function moveRecordingToPublicDirectory(uri) {
-    //   try {
-    //     console.log("here");
-    //     const directory =documentDirectory ;
-    //     const fileInfo = await FileSystem.getInfoAsync(directory);
-    //     if (!fileInfo.exists) {
-    //       await FileSystem.makeDirectoryAsync(directory, { intermediates: true });
-    //     }
-    
-    //     const fileName = 'recording_' + Date.now() + '.m4a';
-    //     const newPath = directory + 'recordings/' + `${fileName}`
-    
-    //     // await FileSystem.moveAsync({
-    //     //   from: uri,
-    //     //   to: newPath,
-    //     // });
-    //     //await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'recordings/', { intermediates: true });
-    //     await FileSystem.moveAsync({
-    //       from: uri,
-    //       to: newPath
-    //     });
-    
-    //     console.log('Recording saved at:', newPath);
-    //     return newPath;
-    //   } catch (error) {
-    //     console.error('Error moving recording:', error);
-    //     return null;
-    //   }
-    // }
     async function playSound(uri) {
   
       console.log('Loading Sound');
@@ -108,16 +78,22 @@ const RecordScreen = () => {
   
     return (
       <View style={styles.container}>
-        <Button
-          title={recording ? 'Stop Recording' : 'Start Recording'}
-          onPress={recording ? stopRecording : startRecording}
-        />
+        <TouchableOpacity
+            style={styles.button}
+            onPress={recording ? stopRecording : startRecording}
+            >
+            <Text style={styles.buttonText}>
+                {recording ? 'Stop Recording' : 'Start Recording'}
+            </Text>
+
+      </TouchableOpacity>
         {isPlaying && (
-          <Button
-            title="Stop Playback"
-            onPress={stopSound}
-          />
+            <Button
+                title="Stop Playback"
+                onPress={stopSound}
+            />
         )}
+
       </View>
     );
 };
@@ -128,6 +104,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  button: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 18,
   },
 });
 
