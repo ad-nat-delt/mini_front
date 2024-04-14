@@ -1,27 +1,15 @@
 import React from 'react';
 import { StyleSheet, View,TouchableOpacity,Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 const FunctionScreen = () => {
-  async function handleTranscribe() {
-    // Add your transcription logic here
-    console.log('Transcribe button pressed');
-  }
-
-  async function handleSummarize() {
-    // Add your summarization logic here
-    console.log('Summarize button pressed');
-  };
-
-  async function handleEvents() {
-    // Add your event recording logic here
-    console.log('Record Events button pressed');
-  };
-
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
     <TouchableOpacity
         style={styles.button}
-        onPress={handleTranscribe}
+        onPress={() => navigation.navigate('Transcribe')}
         >
         <Text style={styles.buttonText}>
             Transcribe
@@ -30,7 +18,7 @@ const FunctionScreen = () => {
   </TouchableOpacity>
   <TouchableOpacity
         style={styles.button}
-        onPress={handleSummarize}
+        onPress={() => navigation.navigate('Summarize')}
         >
         <Text style={styles.buttonText}>
             Summarize
@@ -39,7 +27,7 @@ const FunctionScreen = () => {
   </TouchableOpacity>
   <TouchableOpacity
         style={styles.button}
-        onPress={handleEvents}
+        onPress={() => navigation.navigate('Events')}
         >
         <Text style={styles.buttonText}>
             Events
@@ -52,20 +40,23 @@ const FunctionScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#FFF694',
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
+    backgroundColor: '#D67638',
+    paddingVertical: 15,
+    paddingHorizontal: 25,
+    borderRadius: 10,
+    marginTop: 20
   },
   buttonText: {
-    color: '#fff',
+    color: 'black',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 19,
+    textAlign: 'center'
   },
 });
 
